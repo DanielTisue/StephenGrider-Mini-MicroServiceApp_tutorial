@@ -1,8 +1,8 @@
-# Getting Started with Create React App
+# MiniMicroService App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a tutorial copied from Stephen Grider as an intro code-along to learning about micro services. In this app the user can create a post, and users can then comment on a post. 
 
-## Available Scripts
+## Behind the scenes
 
 In the project directory, you can run:
 
