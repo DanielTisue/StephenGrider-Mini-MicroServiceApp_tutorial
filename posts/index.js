@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // Below is a function from 'crypto' to generate random ids
 const { randomBytes } = require('crypto');
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors()); //CORS is a function and therefore called as such.
 
 // Using in-memory data structure.
 const posts = {};
