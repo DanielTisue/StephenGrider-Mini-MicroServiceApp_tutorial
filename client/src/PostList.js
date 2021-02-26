@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 //useEffect hook can be used run some code at very specific points in time in the life cycle of a component. In our case we will want to run fetchPosts function only when it is first displayed on the screen. 
 import axios from 'axios';
+import CommentCreate from './CommentCreate';
+import CommentList from './CommentList';
 
 export default () => {
 const [posts, setPosts] = useState({});
@@ -22,7 +24,15 @@ return (
   <div className="card" style={{ width: '30%', marginBottom: '20px'}} key={post.id}>
     <div className='card-body'>
       <h3>{post.title}</h3>
+      <hr />
+      <h6><strong>Comments:</strong></h6>
+      <CommentList postId={post.id} />
+      <hr />
+      <CommentCreate postId={post.id}/> 
+      {/*post.id comes from map function above, .map(post => /{*/}
+
       </div>
+    
   </div>
 );
 });
