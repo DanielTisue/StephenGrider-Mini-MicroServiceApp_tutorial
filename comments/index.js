@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 // Below is a function from 'crypto' to generate random ids
 const { randomBytes } = require('crypto');
 const cors = require('cors');
+const axios = require('axios');
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,6 +24,16 @@ const { content } = req.body;
 const comments= commentsByPostId[req.params.id] || [];
 
 comments.push({ id: commentId, content });
+
+axios.post('http://localhost:4005/events', {
+  type: 'CommentCreated',
+  data: {
+    id: commentId, // taken from line 21 & 26 where commentId is established
+    content, // taken from line 22 & 26 where comment is outlined 
+    postId: req.params.id //taken from line 16 & 24 where postId is established.
+  }
+
+})
 
 commentsByPostId[req.params.id] = comments;
 
