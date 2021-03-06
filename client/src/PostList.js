@@ -9,7 +9,7 @@ const [posts, setPosts] = useState({});
 
 const fetchPosts = async () => {
   const res = await axios.get('http://localhost:4002/posts');
-  // console.log(res.data); - used to test after changing get request from port 4000 to 4002 - where query serviced is.
+  // console.log(res.data); - used to test after changing get request from port 4000 to 4002 - where query service is.
   setPosts(res.data);
 };
 
