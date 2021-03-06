@@ -8,8 +8,8 @@ export default () => {
 const [posts, setPosts] = useState({});
 
 const fetchPosts = async () => {
-  const res = await axios.get('http://localhost:4000/posts');
-
+  const res = await axios.get('http://localhost:4002/posts');
+  // console.log(res.data); - used to test after changing get request from port 4000 to 4002 - where query serviced is.
   setPosts(res.data);
 };
 
@@ -26,7 +26,7 @@ return (
       <h3>{post.title}</h3>
       <hr />
       <h6><strong>Comments:</strong></h6>
-      <CommentList postId={post.id} />
+      <CommentList comments={post.comments} />
       <hr />
       <CommentCreate postId={post.id}/> 
       {/*post.id comes from map function above, .map(post => /{*/}
