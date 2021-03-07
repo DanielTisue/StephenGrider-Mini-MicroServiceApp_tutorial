@@ -18,12 +18,12 @@ res.send(commentsByPostId[req.params.id] || []);
 
 app.post('/posts/:id/comments', async (req, res) => {
 // This tells us the type of random 'id' we want to create. In this instance we are using 'hex'.
-const commentId = randomBytes(4).toString('hex');
-const { content } = req.body;
+const commentId = randomBytes(4).toString('hex'); //generate random id
+const { content } = req.body; //get the content of the comment
 
-const comments= commentsByPostId[req.params.id] || [];
+const comments= commentsByPostId[req.params.id] || []; //get the list of comments associated with the given post that already exists.
 
-comments.push({ id: commentId, content });
+comments.push({ id: commentId, content, status: 'pending' }); //where the comment is created.
 
 commentsByPostId[req.params.id] = comments;
 
@@ -32,7 +32,8 @@ await axios.post('http://localhost:4005/events', {
   data: {
     id: commentId, // taken from line 21 & 26 where commentId is established
     content, // taken from line 22 & 26 where comment is outlined 
-    postId: req.params.id //taken from line 16 & 24 where postId is established.
+    postId: req.params.id, //taken from line 16 & 24 where postId is established.
+    status: 'pending'
   }
 
 })
