@@ -1,5 +1,5 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+//removed require body-parser due to notification to use the following below
 // Below is a function from 'crypto' to generate random ids
 const { randomBytes } = require('crypto');
 const cors = require('cors');

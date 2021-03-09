@@ -1,5 +1,5 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+//removed require body-parser due to notification to use the following below
 const cors = require('cors');
 
 const app = express();
