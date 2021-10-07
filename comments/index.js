@@ -33,10 +33,11 @@ await axios.post('http://localhost:4005/events', {
     id: commentId, // taken from line 21 & 26 where commentId is established
     content, // taken from line 22 & 26 where comment is outlined 
     postId: req.params.id, //taken from line 16 & 24 where postId is established.
-    status: 'pending'
-  }
-
-})
+    status: 'pending',
+  }  
+}).catch((err) => {
+      console.log(err.message);
+});
 
 
 
@@ -49,16 +50,16 @@ app.post('/events', async (req, res) => {
   const { type, data } = req.body;
 
   if (type === 'CommentModerated') {
-    const { postId, id, status } = data;
+    const { postId, id, status, content } = data;
 
     const comments = commentsByPostId[postId];
 
-    const comment = comments.find( comment => {
+    const comment = comments.find( (comment) => {
       return comment.id === id;
     });
     comment.status = status;
 
-    await axios.post('http://loca;host:4005/events', {
+    await axios.post('http://localhost:4005/events', {
       type: 'CommentUpdated',
       data: {
         id,
@@ -66,7 +67,9 @@ app.post('/events', async (req, res) => {
         postId,
         content
       }
-    })
+    }).catch((err) =>
+      console.log(err.message)
+      );
   }
 
   res.send({});
