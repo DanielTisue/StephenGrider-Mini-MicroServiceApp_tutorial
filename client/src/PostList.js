@@ -7,8 +7,9 @@ import CommentList from './CommentList';
 export default () => {
 const [posts, setPosts] = useState({});
 
+// when deploying via docker / kubernetes ingress-nginx [localhost:4002] gets changed to url used in host file [posts.com]
 const fetchPosts = async () => {
-  const res = await axios.get('http://localhost:4002/posts');
+  const res = await axios.get('http://posts.com/posts');
   // console.log(res.data); - used to test after changing get request from port 4000 to 4002 - where query service is.
   setPosts(res.data);
 };

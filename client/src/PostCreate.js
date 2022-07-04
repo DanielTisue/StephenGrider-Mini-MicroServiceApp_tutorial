@@ -6,8 +6,8 @@ export default () => {
   
   const onSubmit = async (event) => {
     event.preventDefault();
-
-    await axios.post('http://localhost:4000/posts', {
+// when deploying via docker / kubernetes ingress-nginx [localhost:4000] gets changed to url used in host file [posts.com]
+    await axios.post('http://posts.com/posts/create', {
       title
     });
 

@@ -16,16 +16,19 @@ app.get('/posts', (req, res) => {
 res.send(posts);
 });
 
-app.post('/posts', async (req, res) => {
+app.post('/posts/create', async (req, res) => {
   // This tells us the type of random 'id' we want to create. In this instance we are using 'hex'.
 const id = randomBytes(4).toString('hex');
 const { title } = req.body;
 
+// this is adding a new post to our post collection and storing it locally.
 posts[id] = {
   id, title
-}; // this is adding a new post to our post collection and storing it locally.
+}; 
 
-await axios.post('http://localhost:4005/events', {
+// post req on local machine for dev http://localhost:4005/events but for kubernetes needs to be http://event-bus-srv:4005
+
+await axios.post('http://event-bus-srv:4005/events', {
   type: 'PostCreated',
   data: {
     id, 
@@ -45,5 +48,6 @@ app.post('/events', (req, res) => {
 });
 
 app.listen(4000, () => {
+  console.log('v0.0.1')
   console.log('Listening on 4000');
 });
